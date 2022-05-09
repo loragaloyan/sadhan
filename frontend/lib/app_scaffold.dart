@@ -176,7 +176,8 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
     List<Widget> rows = [
       Expanded(
         flex: 1,
-        child: _buildNavButton('/home', 'Home', Icons.home, context, width: double.infinity, fontSize: 10),
+        //child: _buildNavButton('/home', 'Home', Icons.home, context, width: double.infinity, fontSize: 10),
+        child: _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context, width: double.infinity, fontSize: 10),
       ),
     ];
     if (!currentUserState.isLoggedIn) {
@@ -265,7 +266,8 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
         backgroundColor: Colors.white,
         title: Image.asset('assets/images/logo.png', width: 100, height: 50),
         actions: <Widget>[
-          _buildNavButton('/home', 'Home', Icons.home, context),
+          //_buildNavButton('/home', 'Home', Icons.home, context),
+          _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context),
           _buildUserButton(context, currentUserState),
           _buildDrawerButton(context),
         ],
