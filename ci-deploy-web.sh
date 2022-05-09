@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd /var/www/seed_app && \
+cd /var/www/sadhan && \
     git pull origin master && \
     pip3 install -r ./requirements.txt && \
     cd frontend && flutter build web && cd ../ && \

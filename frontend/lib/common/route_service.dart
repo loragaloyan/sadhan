@@ -8,6 +8,7 @@ class RouteService {
   }
 
   void goHome(var context) {
-    Navigator.pushNamed(context, '/meditate');
+    //Navigator.pushNamed(context, '/meditate');
+    Navigator.pushNamed(context, '/home');
   }
 }

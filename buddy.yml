@@ -14,7 +14,7 @@
       env_key: "secure!6VJM9Is6ZkhJ4mrEg7VXiw==.PCqMpSqWLEhGw77YXyJnPA=="
       authentication_mode: "ENV_KEY"
       commands:
-      - "cd /var/www/seed_app && \\"
+      - "cd /var/www/sadhan && \\"
       - "    git pull origin master && \\"
       - "    pip3 install -r ./requirements.txt && \\"
       - "    cd frontend && flutter build web && cd ../ && \\"

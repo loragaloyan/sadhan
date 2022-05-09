@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../app_scaffold.dart';
+import './meditate_map.dart';
 
 class HomeComponent extends StatefulWidget {
   @override
@@ -20,7 +21,7 @@ class _HomeComponentState extends State<HomeComponent> {
     return AppScaffoldComponent(
       body: ListView(
         children: [
-          Text('Home'),
+          MeditateMap(),
         ]
       )
     );

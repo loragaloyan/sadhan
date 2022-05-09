@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../app_scaffold.dart';
+import '../../common/localstorage_service.dart';
 import '../../common/form_input/input_fields.dart';
 
 class MeditateComponent extends StatefulWidget {
@@ -11,6 +12,7 @@ class MeditateComponent extends StatefulWidget {
 
 class _MeditateComponentState extends State<MeditateComponent> {
   InputFields _inputFields = InputFields();
+  LocalstorageService _localstorageService = LocalstorageService();
 
   var formVals = {
     'timeMinutes': 60,
@@ -19,6 +21,8 @@ class _MeditateComponentState extends State<MeditateComponent> {
   int _startSeconds = 60 * 60;
   int _elapsedSeconds = 0;
   String _timeState = "stopped"; // "stopped" or "running"
+  bool _inited = false;
+  String _localstorageKey = 'meditateTimeMinutes';
 
   @override
   void initState() {
@@ -27,6 +31,16 @@ class _MeditateComponentState extends State<MeditateComponent> {
 
   @override
   Widget build(BuildContext context) {
+    if (!_inited) {
+      var timeMinutesString = _localstorageService.getItem(_localstorageKey);
+      if (timeMinutesString != null) {
+        int timeMinutes = int.parse(timeMinutesString);
+        formVals['timeMinutes'] = timeMinutes;
+        _startSeconds = timeMinutes * 60;
+      }
+      _inited = true;
+    }
+
     String buttonText = _timeState == "running" ? "Pause" : "Start";
     int elapsedMinutes = (_elapsedSeconds / 60).floor();
     int elapsedSeconds = (_elapsedSeconds % 60);
@@ -37,6 +51,7 @@ class _MeditateComponentState extends State<MeditateComponent> {
             stopTimer();
             _startSeconds = (val! * 60).floor();
             _elapsedSeconds = 0;
+            _localstorageService.setItem(_localstorageKey, val.toString());
           }),
           ElevatedButton(
             onPressed: () {

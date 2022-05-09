@@ -14,4 +14,16 @@ class LocalstorageService {
   }
 
   get localstorage => _localstorage;
+
+  dynamic getItem(String key) {
+    return _localstorage?.getItem(key);
+  }
+
+  void deleteItem(String key) {
+    _localstorage?.deleteItem(key);
+  }
+
+  void setItem(String key, String value) {
+    _localstorage?.setItem(key, value);
+  }
 }

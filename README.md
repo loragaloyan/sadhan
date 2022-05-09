@@ -1,4 +1,4 @@
-# seed_app
+# sadhan
 
 Python (with sockets) + MongoDB + Flutter
 
@@ -29,7 +29,7 @@ For (Ubuntu) script, see `server-setup.sh`
 ### SSL (HTTPS) with letsencrypt
 
 - Run on server without SSL (set config.yml and frontend/.env to http only)
-- `certbot certonly --webroot` (just use /var/www/seed_app for the webroot, though not sure if this matters?)
+- `certbot certonly --webroot` (just use /var/www/sadhan for the webroot, though not sure if this matters?)
 - Update config.yml and frontend.env to use https (and add the path to the generated SSL files)
 
 
