@@ -174,10 +174,10 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
 
   Widget _buildHeader(var context, var currentUserState) {
     List<Widget> rows = [
-      Expanded(
-        flex: 1,
-        child: _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context, width: double.infinity, fontSize: 10),
-      ),
+      //Expanded(
+      //  flex: 1,
+      //  child: _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context, width: double.infinity, fontSize: 10),
+      //),
       Expanded(
         flex: 1,
         child: _buildNavButton('/home', 'Home', Icons.home, context, width: double.infinity, fontSize: 10),
@@ -270,7 +270,7 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
         title: Image.asset('assets/images/logo.png', width: 100, height: 50),
         actions: <Widget>[
           _buildNavButton('/home', 'Home', Icons.home, context),
-          _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context),
+          //_buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context),
           _buildUserButton(context, currentUserState),
           _buildDrawerButton(context),
         ],

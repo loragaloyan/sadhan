@@ -5,12 +5,12 @@ import '../app_scaffold.dart';
 import '../../common/localstorage_service.dart';
 import '../../common/form_input/input_fields.dart';
 
-class MeditateComponent extends StatefulWidget {
+class Meditate extends StatefulWidget {
   @override
-  _MeditateComponentState createState() => _MeditateComponentState();
+  _MeditateState createState() => _MeditateState();
 }
 
-class _MeditateComponentState extends State<MeditateComponent> {
+class _MeditateState extends State<Meditate> {
   InputFields _inputFields = InputFields();
   LocalstorageService _localstorageService = LocalstorageService();
 
@@ -44,24 +44,23 @@ class _MeditateComponentState extends State<MeditateComponent> {
     String buttonText = _timeState == "running" ? "Pause" : "Start";
     int elapsedMinutes = (_elapsedSeconds / 60).floor();
     int elapsedSeconds = (_elapsedSeconds % 60);
-    return AppScaffoldComponent(
-      body: ListView(
-        children: [
-          _inputFields.inputNumber(context, formVals, 'timeMinutes', label: 'Minutes', debounceChange: 1000, onChange: (double? val) {
-            stopTimer();
-            _startSeconds = (val! * 60).floor();
-            _elapsedSeconds = 0;
-            _localstorageService.setItem(_localstorageKey, val.toString());
-          }),
-          ElevatedButton(
-            onPressed: () {
-              toggleTimerState();
-            },
-            child: Text(buttonText),
-          ),
-          Text('${elapsedMinutes.toString()}:${elapsedSeconds.toString()} ${_startSeconds.toString()}'),
-        ]
-      )
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _inputFields.inputNumber(context, formVals, 'timeMinutes', label: 'Minutes', debounceChange: 1000, onChange: (double? val) {
+          stopTimer();
+          _startSeconds = (val! * 60).floor();
+          _elapsedSeconds = 0;
+          _localstorageService.setItem(_localstorageKey, val.toString());
+        }),
+        ElevatedButton(
+          onPressed: () {
+            toggleTimerState();
+          },
+          child: Text(buttonText),
+        ),
+        Text('${elapsedMinutes.toString()}:${elapsedSeconds.toString()} ${_startSeconds.toString()}'),
+      ]
     );
   }
 

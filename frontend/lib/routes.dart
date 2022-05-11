@@ -11,7 +11,7 @@ import './modules/user_auth/user_password_reset.dart';
 import './modules/user_auth/user_signup.dart';
 import '../common/route_service.dart';
 
-import './modules/meditate.dart';
+//import './modules/meditate.dart';
 
 class AppRouter {
   static FluroRouter router = FluroRouter.appRouter;
@@ -42,7 +42,8 @@ class AppRoutes {
 
   static final rootRoute = AppRoute('/', Handler(
     handlerFunc: (context, params) {
-      return MeditateComponent();
+      //return Meditate();
+      return HomeComponent();
     }
   ));
 
@@ -67,9 +68,9 @@ class AppRoutes {
     handlerFunc: (context, params) => UserPasswordResetComponent(),
   ));
 
-  static final meditateRoute = AppRoute('/meditate', Handler(
-    handlerFunc: (context, params) => MeditateComponent(),
-  ));
+  //static final meditateRoute = AppRoute('/meditate', Handler(
+  //  handlerFunc: (context, params) => Meditate(),
+  //));
 
   // Primitive function to get one param detail route (i.e. id).
   //static String getDetailRoute(String parentRoute, String id) {
@@ -85,7 +86,7 @@ class AppRoutes {
     emailVerifyRoute,
     passwordResetRoute,
 
-    meditateRoute,
+    //meditateRoute,
   ];
 }
 
