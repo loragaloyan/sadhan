@@ -1,9 +1,13 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
 import '../app_scaffold.dart';
 import '../../common/localstorage_service.dart';
 import '../../common/form_input/input_fields.dart';
+import '../../common/socket_service.dart';
+import '../../common/datetime_service.dart';
 
 class Meditate extends StatefulWidget {
   @override
@@ -13,19 +17,38 @@ class Meditate extends StatefulWidget {
 class _MeditateState extends State<Meditate> {
   InputFields _inputFields = InputFields();
   LocalstorageService _localstorageService = LocalstorageService();
+  SocketService _socketService = SocketService();
+  DatetimeService _datetimeService = DatetimeService();
+
+  List<String> _routeIds = [];
 
   var formVals = {
     'timeMinutes': 60,
   };
   Timer? _timer = null;
-  int _startSeconds = 60 * 60;
+  int _secondsRemaining = 60 * 60;
   int _elapsedSeconds = 0;
   String _timeState = "stopped"; // "stopped" or "running"
   bool _inited = false;
   String _localstorageKey = 'meditateTimeMinutes';
 
+  double? _latitude = 0;
+  double? _longitude = 0;
+  //LocationData? _locationData;
+  String _startSessionKey = '';
+
   @override
   void initState() {
+    getLocation();
+    _startSessionKey = _datetimeService.stringFormat(DateTime.now());
+    print ('_startSessionKey ${_startSessionKey} ${_latitude} ${_longitude}');
+
+    _routeIds.add(_socketService.onRoute('saveUserMeditation', callback: (String resString) {
+      var res = json.decode(resString);
+      var data = res['data'];
+      print ('data ${data}');
+    }));
+
     super.initState();
   }
 
@@ -36,7 +59,7 @@ class _MeditateState extends State<Meditate> {
       if (timeMinutesString != null) {
         int timeMinutes = int.parse(timeMinutesString);
         formVals['timeMinutes'] = timeMinutes;
-        _startSeconds = timeMinutes * 60;
+        _secondsRemaining = timeMinutes * 60;
       }
       _inited = true;
     }
@@ -49,7 +72,7 @@ class _MeditateState extends State<Meditate> {
       children: [
         _inputFields.inputNumber(context, formVals, 'timeMinutes', label: 'Minutes', debounceChange: 1000, onChange: (double? val) {
           stopTimer();
-          _startSeconds = (val! * 60).floor();
+          _secondsRemaining = (val! * 60).floor();
           _elapsedSeconds = 0;
           _localstorageService.setItem(_localstorageKey, val.toString());
         }),
@@ -59,7 +82,7 @@ class _MeditateState extends State<Meditate> {
           },
           child: Text(buttonText),
         ),
-        Text('${elapsedMinutes.toString()}:${elapsedSeconds.toString()} ${_startSeconds.toString()}'),
+        Text('${elapsedMinutes.toString()}:${elapsedSeconds.toString()} ${_secondsRemaining.toString()}'),
       ]
     );
   }
@@ -67,6 +90,7 @@ class _MeditateState extends State<Meditate> {
   @override
   void dispose() {
     clearTimer();
+    _socketService.offRouteIds(_routeIds);
     super.dispose();
   }
 
@@ -75,14 +99,14 @@ class _MeditateState extends State<Meditate> {
     _timer = new Timer.periodic(
       oneSec,
       (Timer timer) {
-        if (_startSeconds == 0) {
+        if (_secondsRemaining == 0) {
           if (_timer != null) {
             stopTimer();
           }
         } else {
           if (_timeState == "running") {
             setState(() {
-              _startSeconds--;
+              _secondsRemaining--;
               _elapsedSeconds++;
             });
           }
@@ -115,5 +139,33 @@ class _MeditateState extends State<Meditate> {
       });
       startTimer();
     }
+  }
+
+  void getLocation() async {
+    Location location = new Location();
+
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
+
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+
+    LocationData locationData = await location.getLocation();
+    _latitude = locationData.latitude;
+    _longitude = locationData.longitude;
+    print ('locationData ${locationData}');
   }
 }

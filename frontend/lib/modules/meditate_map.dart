@@ -5,6 +5,7 @@ import 'package:mapbox_gl/mapbox_gl.dart';
 import '../app_scaffold.dart';
 import '../../common/layout_service.dart';
 import '../../common/mapbox/mapbox_draw_service.dart';
+import './meditators.dart';
 
 class MeditateMap extends StatefulWidget {
   double mapHeight;
@@ -55,7 +56,10 @@ class _MeditateMapState extends State<MeditateMap> {
           width: double.infinity,
           height: height,
           child: _map,
-        )
+        ),
+        SizedBox(height: 10),
+        Meditators(),
+        SizedBox(height: 10),
       ]
     );
   }
