@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Deploy
-          command: ssh -oStrictHostKeyChecking=no root@164.92.122.186 'cd /var/www/sadhan && git checkout . && git pull origin master && pip3 install -r ./requirements.txt && cd frontend && flutter upgrade && flutter build web && cd ../ systemctl restart systemd_web_server.service'
+          command: ssh -oStrictHostKeyChecking=no root@164.92.122.186 'cd /var/www/sadhan && git checkout . && git pull origin master && pip3 install -r ./requirements.txt && cd frontend && flutter upgrade && CI=false flutter build web && cd ../ && systemctl restart systemd_web_server.service'
 workflows:
   deploy_app:
     jobs:
