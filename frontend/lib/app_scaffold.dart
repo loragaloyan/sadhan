@@ -174,14 +174,18 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
 
   Widget _buildHeader(var context, var currentUserState) {
     List<Widget> rows = [
-      //Expanded(
-      //  flex: 1,
-      //  child: _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context, width: double.infinity, fontSize: 10),
-      //),
       Expanded(
         flex: 1,
-        child: _buildNavButton('/home', 'Home', Icons.home, context, width: double.infinity, fontSize: 10),
-      )
+        child: _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context, width: double.infinity, fontSize: 10),
+      ),
+      Expanded(
+        flex: 1,
+        child: _buildNavButton('/meditate-map', 'Map', Icons.public, context, width: double.infinity, fontSize: 10),
+      ),
+      //Expanded(
+      //  flex: 1,
+      //  child: _buildNavButton('/home', 'Home', Icons.home, context, width: double.infinity, fontSize: 10),
+      //)
     ];
     if (!currentUserState.isLoggedIn) {
       rows.add(Expanded(
@@ -234,7 +238,13 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
                 child: Container(
                   width: 1200,
                   child: widget.body,
-                  color: Colors.white,
+                  //color: Colors.white,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/sun.jpg'),
+                      fit: BoxFit.fill,
+                    )
+                  ),
                 )
               )
             )
@@ -249,7 +259,13 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
         child: Container(
           width: 1200,
           child: widget.body,
-          color: Colors.white,
+          //color: Colors.white,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/sun.jpg'),
+              fit: BoxFit.fill,
+            )
+          ),
         )
       )
     );
@@ -269,8 +285,9 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
         backgroundColor: Colors.white,
         title: Image.asset('assets/images/logo.png', width: 100, height: 50),
         actions: <Widget>[
-          _buildNavButton('/home', 'Home', Icons.home, context),
-          //_buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context),
+          //_buildNavButton('/home', 'Home', Icons.home, context),
+          _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context),
+          _buildNavButton('/meditate-map', 'Map', Icons.public, context),
           _buildUserButton(context, currentUserState),
           _buildDrawerButton(context),
         ],
@@ -285,11 +302,12 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
     var currentUserState = context.watch<CurrentUserState?>();
     return LayoutBuilder(
       builder: (context, constraints) {
-        if (constraints.maxWidth > 600) {
-          return _buildMedium(context, currentUserState);
-        } else {
-          return _buildSmall(context, currentUserState);
-        }
+        //if (constraints.maxWidth > 600) {
+        //  return _buildMedium(context, currentUserState);
+        //} else {
+        //  return _buildSmall(context, currentUserState);
+        //}
+        return _buildSmall(context, currentUserState);
       }
     );
   }
