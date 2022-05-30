@@ -140,7 +140,7 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
             child: Column(
               children: <Widget>[
                 //Icon(Icons.menu, color: Theme.of(context).primaryColor),
-                Image.asset('assets/images/timer.png', width: 30, height: 30),
+                Image.asset('assets/images/profile.png', width: 30, height: 30),
                 Text(
                   'More',
                   style: TextStyle(
