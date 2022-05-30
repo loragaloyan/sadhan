@@ -65,7 +65,8 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
         padding: EdgeInsets.only(top: 10),
         child: Column(
           children: <Widget>[
-            Icon(Icons.person, color: Theme.of(context).primaryColor),
+            //Icon(Icons.person, color: Theme.of(context).primaryColor),
+            Image.asset('assets/images/profile.png', width: 30, height: 30),
             Text(
               'Log In',
               style: TextStyle(

@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+//import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio/just_audio.dart';
 
 import '../app_scaffold.dart';
 import '../../common/localstorage_service.dart';
@@ -37,6 +39,9 @@ class _MeditateState extends State<Meditate> {
   //LocationData? _locationData;
   String _startSessionKey = '';
 
+  //AudioCache audioCache = AudioCache();
+  late AudioPlayer audioPlayer;
+
   @override
   void initState() {
     getLocation();
@@ -50,6 +55,8 @@ class _MeditateState extends State<Meditate> {
     }));
 
     super.initState();
+
+    audioPlayer = AudioPlayer();
   }
 
   @override
@@ -109,6 +116,7 @@ class _MeditateState extends State<Meditate> {
   void dispose() {
     clearTimer();
     _socketService.offRouteIds(_routeIds);
+    audioPlayer.dispose();
     super.dispose();
   }
 
@@ -147,7 +155,7 @@ class _MeditateState extends State<Meditate> {
     });
   }
 
-  void toggleTimerState() {
+  void toggleTimerState() async {
     if (_timeState == "running") {
       stopTimer();
     } else {
@@ -156,6 +164,9 @@ class _MeditateState extends State<Meditate> {
         _timeState = _timeState;
       });
       startTimer();
+      //audioCache.play("assets/sounds/taira-komori-budda-large.mp3");
+      await audioPlayer.setAsset('assets/sounds/taira-komori-budda-large.mp3');
+      audioPlayer.play();
     }
   }
 

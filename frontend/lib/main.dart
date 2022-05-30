@@ -86,29 +86,32 @@ class _MyApp extends State<MyApp> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'sadhan',
+      title: 'Sadhan',
       onGenerateRoute: AppRouter.router.generator,
       theme: ThemeData(
         primaryColor: Color.fromRGBO(255, 255, 255, 1),
         accentColor: Color.fromRGBO(2, 39, 53, 1),
+        hintColor: Color.fromRGBO(255, 255, 255, 1),
         colorScheme: Theme.of(context).colorScheme.copyWith(
           primary: Color.fromRGBO(255, 255, 255, 1),
           secondary: Color.fromRGBO(2, 39, 53, 1),
-          primaryVariant: Color.fromRGBO(0, 124, 0, 1),
-          secondaryVariant: Color.fromRGBO(6, 36, 104, 1),
-          background: Color.fromRGBO(0, 181, 181, 1),
-          surface: Color.fromRGBO(0, 93, 93, 1),
+          primaryVariant: Color.fromRGBO(255, 255, 255, 1),
+          secondaryVariant: Color.fromRGBO(255, 255, 255, 1),
+          background: Color.fromRGBO(255, 255, 255, 1),
+          surface: Color.fromRGBO(255, 255, 255, 1),
         ),
-        backgroundColor: Colors.grey,
+        backgroundColor: Color.fromRGBO(255, 255, 255, 1),
         textTheme: GoogleFonts.ptSansTextTheme(Theme.of(context).textTheme).copyWith(
-          headline1: TextStyle(fontSize: 32, fontWeight: FontWeight.w300),
-          headline2: TextStyle(fontSize: 26, fontWeight: FontWeight.w300),
-          headline3: TextStyle(fontSize: 21, fontWeight: FontWeight.w300),
-          headline4: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-          headline5: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
-          headline6: TextStyle(fontSize: 12, fontWeight: FontWeight.w300),
-          bodyText1: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
-          bodyText2: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
+          headline1: TextStyle(fontSize: 32, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 1)),
+          headline2: TextStyle(fontSize: 26, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 1)),
+          headline3: TextStyle(fontSize: 21, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 1)),
+          headline4: TextStyle(fontSize: 18, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 1)),
+          headline5: TextStyle(fontSize: 15, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 1)),
+          headline6: TextStyle(fontSize: 12, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 1)),
+          bodyText1: TextStyle(fontSize: 15, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 1)),
+          bodyText2: TextStyle(fontSize: 15, fontWeight: FontWeight.w300, color: Color.fromRGBO(255, 255, 255, 1)),
+          caption: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
+          subtitle1: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
         ).apply(
           bodyColor: Color.fromRGBO(255, 255, 255, 1),
           displayColor: Color.fromRGBO(255, 255, 255, 1),
@@ -119,6 +122,15 @@ class _MyApp extends State<MyApp> {
           primary: Color.fromRGBO(2, 39, 53, 1),
          )
         ),
+        inputDecorationTheme: InputDecorationTheme(
+          labelStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
+          helperStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
+          hintStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
+          floatingLabelStyle: TextStyle(color: Color.fromRGBO(255, 255, 255, 1)),
+          hoverColor: Color.fromRGBO(255, 255, 255, 1),
+          border: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromRGBO(255, 255, 255, 1))),
+          enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Color.fromRGBO(255, 255, 255, 1))),
+        )
       ),
     );
   }

@@ -31,18 +31,21 @@ class _MeditatorsState extends State<Meditators> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Sadhaks Meditating: ${_meditators.length}'),
-        Wrap(
-          spacing: 5,
-          runSpacing: 5,
-          children: [
-            ..._meditators.map((meditator) => _buildMeditator(context, meditator) ).toList(),
-          ]
-        ),
-      ]
+    return Container(
+      padding: EdgeInsets.only(left: 10, right: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Sadhaks Meditating: ${_meditators.length}'),
+          Wrap(
+            spacing: 5,
+            runSpacing: 5,
+            children: [
+              ..._meditators.map((meditator) => _buildMeditator(context, meditator) ).toList(),
+            ]
+          ),
+        ]
+      )
     );
   }
 
