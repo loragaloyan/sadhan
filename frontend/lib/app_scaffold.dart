@@ -54,8 +54,12 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
       },
       style: TextButton.styleFrom(
         primary: Colors.white,
+        backgroundColor: Theme.of(context).accentColor,
         minimumSize: Size.fromWidth(width),
         padding: EdgeInsets.all(0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.zero)
+        ),
       ),
       child: Container(
         padding: EdgeInsets.only(top: 10),
@@ -89,8 +93,12 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
       },
       style: TextButton.styleFrom(
         primary: Colors.white,
+        backgroundColor: Theme.of(context).accentColor,
         minimumSize: Size.fromWidth(width),
         padding: EdgeInsets.all(0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.zero)
+        ),
       ),
       child: Container(
         padding: EdgeInsets.only(top: 10),
@@ -120,8 +128,12 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
           },
           style: TextButton.styleFrom(
             primary: Colors.white,
+            backgroundColor: Theme.of(context).accentColor,
             minimumSize: Size.fromWidth(width),
             padding: EdgeInsets.all(0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.zero)
+            ),
           ),
           child: Container(
             padding: EdgeInsets.only(top: 10),
@@ -231,7 +243,7 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
         children: <Widget>[
           Expanded(
             child: Container(
-              color: Colors.white,
+              color: Theme.of(context).primaryColor,
               child: Align(
                 alignment: Alignment.center,
                 child: Container(
@@ -253,7 +265,7 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
       );
     }
     return Container(
-      color: Colors.white,
+      color: Theme.of(context).primaryColor,
       child: Align(
         alignment: Alignment.center,
         child: Container(

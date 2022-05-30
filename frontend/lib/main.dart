@@ -89,13 +89,11 @@ class _MyApp extends State<MyApp> {
       title: 'sadhan',
       onGenerateRoute: AppRouter.router.generator,
       theme: ThemeData(
-        // https://paletton.com/#uid=53i0u0kDJDJiVIJpYEuFjqdJVjp
-        primaryColor: Color.fromRGBO(0, 167, 0, 1),
-        //primaryColor: Color.fromRGBO(0, 218, 0, 1),
-        accentColor: Color.fromRGBO(15, 69, 194, 1),
+        primaryColor: Color.fromRGBO(255, 255, 255, 1),
+        accentColor: Color.fromRGBO(2, 39, 53, 1),
         colorScheme: Theme.of(context).colorScheme.copyWith(
-          primary: Color.fromRGBO(0, 167, 0, 1),
-          secondary: Color.fromRGBO(15, 69, 194, 1),
+          primary: Color.fromRGBO(255, 255, 255, 1),
+          secondary: Color.fromRGBO(2, 39, 53, 1),
           primaryVariant: Color.fromRGBO(0, 124, 0, 1),
           secondaryVariant: Color.fromRGBO(6, 36, 104, 1),
           background: Color.fromRGBO(0, 181, 181, 1),
@@ -112,16 +110,15 @@ class _MyApp extends State<MyApp> {
           bodyText1: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
           bodyText2: TextStyle(fontSize: 15, fontWeight: FontWeight.w300),
         ).apply(
-          bodyColor: Color.fromRGBO(90, 90, 90, 1),
-          displayColor: Color.fromRGBO(90, 90, 90, 1),
+          bodyColor: Color.fromRGBO(255, 255, 255, 1),
+          displayColor: Color.fromRGBO(255, 255, 255, 1),
         ),
-        //elevatedButtonTheme: ElevatedButtonThemeData(
-        //  style: ElevatedButton.styleFrom(
-        //    textStyle: TextStyle(
-        //      letterSpacing: 1.05,
-        //    ),
-        //  )
-        //),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+         style: ElevatedButton.styleFrom(
+          onPrimary: Color.fromRGBO(255, 255, 255, 1),
+          primary: Color.fromRGBO(2, 39, 53, 1),
+         )
+        ),
       ),
     );
   }
