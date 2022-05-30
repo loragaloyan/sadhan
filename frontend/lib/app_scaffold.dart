@@ -82,7 +82,7 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
 
   Widget _buildLogoutButton(context, currentUserState) {
     if (currentUserState.isLoggedIn) {
-      return _buildLinkButton(context, '/logout', 'Logout');
+      return _buildLinkButton(context, '/logout', 'Log Out');
     }
     return SizedBox.shrink();
   }
@@ -161,8 +161,12 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
     List<Widget> columns = [];
     if (currentUserState.hasRole('admin')) {
     }
+    if (!currentUserState.isLoggedIn) {
+      columns.add(_buildLinkButton(context, '/login', 'Log In'));
+    }
 
     return Drawer(
+      backgroundColor: Theme.of(context).accentColor,
       child: Column(
         children: <Widget>[
           Row(
