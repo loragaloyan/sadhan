@@ -64,26 +64,44 @@ class _MeditateState extends State<Meditate> {
       _inited = true;
     }
 
-    String buttonText = _timeState == "running" ? "Pause" : "Start";
-    int elapsedMinutes = (_elapsedSeconds / 60).floor();
-    int elapsedSeconds = (_elapsedSeconds % 60);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _inputFields.inputNumber(context, formVals, 'timeMinutes', label: 'Minutes', debounceChange: 1000, onChange: (double? val) {
-          stopTimer();
-          _secondsRemaining = (val! * 60).floor();
-          _elapsedSeconds = 0;
-          _localstorageService.setItem(_localstorageKey, val.toString());
-        }),
-        ElevatedButton(
-          onPressed: () {
-            toggleTimerState();
-          },
-          child: Text(buttonText),
-        ),
-        Text('${elapsedMinutes.toString()}:${elapsedSeconds.toString()} ${_secondsRemaining.toString()}'),
-      ]
+    //String buttonText = _timeState == "running" ? "Pause" : "Start";
+    String meditateIconPath = _timeState == "running" ? "assets/images/timer_active.png" : "assets/images/timer_inactive.png";
+    String elapsedMinutesString = _datetimeService.twoDigits((_elapsedSeconds / 60).floor());
+    String elapsedSecondsString = _datetimeService.twoDigits(_elapsedSeconds % 60);
+    return Align(
+      alignment: Alignment.center,
+      child: Container(
+        width: 300,
+        child: Column(
+          //crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            //Text('Welcome'),
+            //SizedBox(height: 10),
+            IconButton(
+              icon: Image.asset(meditateIconPath, width: 300, height: 300),
+              iconSize: 300,
+              onPressed: () {
+                toggleTimerState();
+              }
+            ),
+            //ElevatedButton(
+            //  onPressed: () {
+            //    toggleTimerState();
+            //  },
+            //  child: Text(buttonText),
+            //),
+            SizedBox(height: 10),
+            _inputFields.inputNumber(context, formVals, 'timeMinutes', label: 'Minutes', debounceChange: 1000, onChange: (double? val) {
+              stopTimer();
+              _secondsRemaining = (val! * 60).floor();
+              _elapsedSeconds = 0;
+              _localstorageService.setItem(_localstorageKey, val.toString());
+            }),
+            SizedBox(height: 10),
+            Text('${elapsedMinutesString}:${elapsedSecondsString}'),
+          ]
+        )
+      )
     );
   }
 

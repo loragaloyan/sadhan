@@ -48,11 +48,11 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
     if (currentUserState.isLoggedIn) {
       return SizedBox.shrink();
     }
-    return ElevatedButton(
+    return TextButton(
       onPressed: () {
         Navigator.pushNamed(context, '/login');
       },
-      style: ElevatedButton.styleFrom(
+      style: TextButton.styleFrom(
         primary: Colors.white,
         minimumSize: Size.fromWidth(width),
         padding: EdgeInsets.all(0),
@@ -82,12 +82,12 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
     return SizedBox.shrink();
   }
 
-  Widget _buildNavButton(String route, String text, IconData icon, var context, { double width = 100, double fontSize = 13 }) {
-    return ElevatedButton(
+  Widget _buildNavButton(String route, String text, String iconPath, var context, { double width = 100, double fontSize = 13 }) {
+    return TextButton(
       onPressed: () {
         Navigator.pushNamed(context, route);
       },
-      style: ElevatedButton.styleFrom(
+      style: TextButton.styleFrom(
         primary: Colors.white,
         minimumSize: Size.fromWidth(width),
         padding: EdgeInsets.all(0),
@@ -96,7 +96,8 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
         padding: EdgeInsets.only(top: 10),
         child: Column(
           children: <Widget>[
-            Icon(icon, color: Theme.of(context).primaryColor),
+            //Icon(icon, color: Theme.of(context).primaryColor),
+            Image.asset(iconPath, width: 30, height: 30),
             Text(
               text,
               style: TextStyle(
@@ -113,11 +114,11 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
   Widget _buildDrawerButton(var context, { double width = 100, double fontSize = 13 }) {
     return Builder(
       builder: (BuildContext context) {
-        return ElevatedButton(
+        return TextButton(
           onPressed: () {
             Scaffold.of(context).openEndDrawer();
           },
-          style: ElevatedButton.styleFrom(
+          style: TextButton.styleFrom(
             primary: Colors.white,
             minimumSize: Size.fromWidth(width),
             padding: EdgeInsets.all(0),
@@ -126,7 +127,8 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
             padding: EdgeInsets.only(top: 10),
             child: Column(
               children: <Widget>[
-                Icon(Icons.menu, color: Theme.of(context).primaryColor),
+                //Icon(Icons.menu, color: Theme.of(context).primaryColor),
+                Image.asset('assets/images/timer.png', width: 30, height: 30),
                 Text(
                   'More',
                   style: TextStyle(
@@ -172,27 +174,27 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
     );
   }
 
-  Widget _buildHeader(var context, var currentUserState) {
+  Widget _buildFooter(var context, var currentUserState) {
     List<Widget> rows = [
       Expanded(
         flex: 1,
-        child: _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context, width: double.infinity, fontSize: 10),
+        child: _buildNavButton('/meditate', 'Meditate', 'assets/images/timer.png', context, width: double.infinity, fontSize: 10),
       ),
       Expanded(
         flex: 1,
-        child: _buildNavButton('/meditate-map', 'Map', Icons.public, context, width: double.infinity, fontSize: 10),
+        child: _buildNavButton('/meditate-map', 'Map', 'assets/images/map.png', context, width: double.infinity, fontSize: 10),
       ),
       //Expanded(
       //  flex: 1,
       //  child: _buildNavButton('/home', 'Home', Icons.home, context, width: double.infinity, fontSize: 10),
       //)
     ];
-    if (!currentUserState.isLoggedIn) {
-      rows.add(Expanded(
-        flex: 1,
-        child: _buildUserButton(context, currentUserState, width: double.infinity, fontSize: 10),
-      ));
-    }
+    //if (!currentUserState.isLoggedIn) {
+    //  rows.add(Expanded(
+    //    flex: 1,
+    //    child: _buildUserButton(context, currentUserState, width: double.infinity, fontSize: 10),
+    //  ));
+    //}
     rows.add(
       Expanded(
         flex: 1,
@@ -208,28 +210,25 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
             ...rows,
           ]
         ),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade300,
-              spreadRadius: 2,
-              blurRadius: 4,
-              offset: Offset(0, 0),
-            )
-          ]
-        ),
+        //decoration: BoxDecoration(
+        //  boxShadow: [
+        //    BoxShadow(
+        //      color: Colors.grey.shade300,
+        //      spreadRadius: 2,
+        //      blurRadius: 4,
+        //      offset: Offset(0, 0),
+        //    )
+        //  ]
+        //),
       )
     );
   }
 
-  Widget _buildBody(var context, var currentUserState, { bool header = false }) {
-    if (header) {
+  Widget _buildBody(var context, var currentUserState, { bool footer = false }) {
+    if (footer) {
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _buildHeader(context, currentUserState),
-          // For drop shadow, otherwise it is cut off.
-          SizedBox(height: 5),
           Expanded(
             child: Container(
               color: Colors.white,
@@ -249,6 +248,7 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
               )
             )
           ),
+          _buildFooter(context, currentUserState),
         ]
       );
     }
@@ -274,7 +274,7 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
   Widget _buildSmall(var context, var currentUserState) {
     return Scaffold(
       endDrawer: _buildDrawer(context, currentUserState),
-      body: _buildBody(context, currentUserState, header: true),
+      body: _buildBody(context, currentUserState, footer: true),
     );
   }
 
@@ -286,9 +286,9 @@ class _AppScaffoldState extends State<AppScaffoldComponent> {
         title: Image.asset('assets/images/logo.png', width: 100, height: 50),
         actions: <Widget>[
           //_buildNavButton('/home', 'Home', Icons.home, context),
-          _buildNavButton('/meditate', 'Meditate', Icons.self_improvement, context),
-          _buildNavButton('/meditate-map', 'Map', Icons.public, context),
-          _buildUserButton(context, currentUserState),
+          _buildNavButton('/meditate', 'Meditate', 'assets/images/timer.png', context),
+          _buildNavButton('/meditate-map', 'Map', 'assets/images/map.png', context),
+          //_buildUserButton(context, currentUserState),
           _buildDrawerButton(context),
         ],
       ),
