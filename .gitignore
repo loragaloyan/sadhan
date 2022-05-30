@@ -5,11 +5,13 @@ __pycache__
 debug.log
 error.log
 
-config.yml
-config-*.yml
+/config.yml
+/config-*.yml
 
-config-*.conf
+/config-*.conf
 
 .env*
 
 uploads
+
+.python-version

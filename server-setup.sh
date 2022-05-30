@@ -8,7 +8,7 @@ cd /var && mkdir www && cd /var/www && \
     # Install python3 and pip3
     apt-get -y update && apt-get -y upgrade && python3 -V && apt -y install python3-pip && \
     # Clone repo
-git clone https://$GITHUB_TOKEN@github.com/lukemadera/sadhan-app.git && \
+git clone https://$GITHUB_TOKEN@github.com/lukemadera/sadhan.git && \
     cd sadhan
 
 # Add SSL cert. https://certbot.eff.org/lets-encrypt/ubuntubionic-other
