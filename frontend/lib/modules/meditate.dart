@@ -29,6 +29,7 @@ class _MeditateState extends State<Meditate> {
   };
   Timer? _timer = null;
   int _secondsRemaining = 60 * 60;
+  int _meditationMinutes = 60;
   int _elapsedSeconds = 0;
   String _timeState = "stopped"; // "stopped" or "running"
   bool _inited = false;
@@ -67,6 +68,7 @@ class _MeditateState extends State<Meditate> {
         int timeMinutes = int.parse(timeMinutesString);
         formVals['timeMinutes'] = timeMinutes;
         _secondsRemaining = timeMinutes * 60;
+        _meditationMinutes = timeMinutes;
       }
       _inited = true;
     }
@@ -100,7 +102,8 @@ class _MeditateState extends State<Meditate> {
             SizedBox(height: 10),
             _inputFields.inputNumber(context, formVals, 'timeMinutes', label: 'Minutes', debounceChange: 1000, onChange: (double? val) {
               stopTimer();
-              _secondsRemaining = (val! * 60).floor();
+              _meditationMinutes = val!.floor();
+              _secondsRemaining = (_meditationMinutes * 60).floor();
               _elapsedSeconds = 0;
               _localstorageService.setItem(_localstorageKey, val.toString());
             }),
@@ -128,6 +131,11 @@ class _MeditateState extends State<Meditate> {
         if (_secondsRemaining == 0) {
           if (_timer != null) {
             stopTimer();
+            playChime('assets/sounds/taira-komori-budda-large.mp3');
+            setState(() {
+              _secondsRemaining = _meditationMinutes * 60;
+              _elapsedSeconds = 0;
+            });
           }
         } else {
           if (_timeState == "running") {
@@ -155,7 +163,7 @@ class _MeditateState extends State<Meditate> {
     });
   }
 
-  void toggleTimerState() async {
+  void toggleTimerState() {
     if (_timeState == "running") {
       stopTimer();
     } else {
@@ -164,9 +172,7 @@ class _MeditateState extends State<Meditate> {
         _timeState = _timeState;
       });
       startTimer();
-      //audioCache.play("assets/sounds/taira-komori-budda-large.mp3");
-      await audioPlayer.setAsset('assets/sounds/taira-komori-budda-large.mp3');
-      audioPlayer.play();
+      playChime('assets/sounds/taira-komori-budda-large.mp3');
     }
   }
 
@@ -196,5 +202,11 @@ class _MeditateState extends State<Meditate> {
     _latitude = locationData.latitude;
     _longitude = locationData.longitude;
     print ('locationData ${locationData}');
+  }
+
+  void playChime(String soundPath) async {
+    //audioCache.play("assets/sounds/taira-komori-budda-large.mp3");
+    await audioPlayer.setAsset(soundPath);
+    audioPlayer.play();
   }
 }
